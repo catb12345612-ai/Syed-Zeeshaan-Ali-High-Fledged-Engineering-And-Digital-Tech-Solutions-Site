@@ -2,210 +2,381 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Smart Scan | Syed Zeeshaan Ali</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Zeeshaan Ali | Elite Digital Tech Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: #ffffff;
-            margin: 0;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        /* High-End Dynamic Background System */
-        #bg-slider-container {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
-            background-color: #050505;
-        }
-        .bg-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-            opacity: 0; transition: opacity 2s ease-in-out;
-        }
-        .bg-slide.active { opacity: 0.6; }
-        
-        /* Dark Gradient Overlay to ensure text readability */
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
+        /* Elite UI Core Variables */
+        :root {
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa8c2c;
+            --glass-bg: rgba(15, 15, 15, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* Glassmorphism Buttons */
-        .glass-btn {
-            background: rgba(10, 10, 10, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030303;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-        .glass-btn:active {
-            transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.1);
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
         }
+
+        /* Cinematic Background Engine (10s Transitions + Ken Burns Zoom) */
+        #bg-engine {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10;
+            background-color: #000;
+        }
+        .bg-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; transform: scale(1);
+            transition: opacity 2s ease-in-out, transform 12s linear;
+        }
+        .bg-layer.active {
+            opacity: 0.35; /* Keeps text readable */
+            transform: scale(1.1); /* Slow cinematic zoom */
+        }
+
+        /* Dark Vignette Overlay */
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -9;
+            background: radial-gradient(circle at center, transparent 0%, #030303 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, #030303 100%);
+        }
+
+        /* Premium Glassmorphism */
+        .premium-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s;
+        }
+        .premium-glass:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        /* Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(to right, var(--gold-primary), var(--gold-light), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: goldShine 4s linear infinite;
+        }
+        @keyframes goldShine { to { background-position: 200% center; } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
         
-        /* Glowing Review Button */
-        .smart-review-btn {
-            background: linear-gradient(135deg, #d4af37, #b8860b);
-            border: none;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            animation: pulse-gold 3s infinite;
+        /* Interactive Inputs */
+        .glass-input {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s ease;
         }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        .glass-input:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
     </style>
 </head>
-<body class="flex flex-col items-center p-4">
+<body class="antialiased">
 
-    <!-- 20-Second Dynamic Background Engine -->
-    <div id="bg-slider-container">
-        <!-- High-res tech & business imagery from Unsplash -->
-        <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');"></div>
-        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');"></div>
-        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop');"></div>
-        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1614064641913-6b0598144b54?q=80&w=2070&auto=format&fit=crop');"></div>
+    <!-- Cinematic Background Engine -->
+    <div id="bg-engine">
+        <!-- JS will populate and animate these layers -->
     </div>
-    <div class="overlay"></div>
+    <div class="vignette"></div>
 
-    <!-- Main Content Container -->
-    <div class="w-full max-w-md mx-auto pt-8 pb-12 relative z-10">
-        
-        <!-- Profile Header -->
-        <div class="text-center mb-10 relative">
-            <div class="relative inline-block">
-                <img src="dev-logo.png_2.png" alt="Syed Zeeshaan Ali" class="w-28 h-28 mx-auto rounded-full border-2 border-yellow-500 object-cover shadow-[0_0_25px_rgba(212,175,55,0.6)] bg-black">
-                <div class="absolute bottom-1 right-1 bg-green-500 w-5 h-5 rounded-full border-2 border-black animate-pulse"></div>
+    <!-- Sticky Glass Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-md border-b border-white/5"></div>
+        <div class="max-w-7xl mx-auto px-6 py-4 relative flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="dev-logo.png_2.png" alt="SZA Logo" class="w-12 h-12 rounded-full border border-yellow-600/50 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                <div>
+                    <h1 class="text-lg font-bold tracking-widest text-white uppercase m-0 leading-tight">Syed Zeeshaan Ali</h1>
+                    <p class="text-[9px] text-yellow-500 uppercase tracking-[0.2em] font-sans">High-Fledged Engineering</p>
+                </div>
             </div>
-            <h1 class="text-2xl font-extrabold mt-5 tracking-wide drop-shadow-md">Syed Zeeshaan Ali</h1>
-            <h2 class="text-xs font-mono text-yellow-500 uppercase tracking-widest mt-2 px-4 leading-relaxed drop-shadow-md">
-                High-Fledged Engineering <br> & Digital Tech Solutions
-            </h2>
-            <p class="text-gray-300 text-sm mt-3 flex items-center justify-center gap-2 drop-shadow-md">
-                <i class="fas fa-map-marker-alt text-red-500"></i> Khammam, Telangana
-            </p>
+            <div class="hidden md:flex gap-8 text-xs font-bold tracking-widest uppercase text-gray-300">
+                <a href="#expertise" class="hover:text-yellow-500 transition-colors">Expertise</a>
+                <a href="#smart-systems" class="hover:text-yellow-500 transition-colors">Smart Systems</a>
+                <a href="#lab" class="hover:text-yellow-500 transition-colors">The Lab</a>
+                <a href="#contact" class="hover:text-yellow-500 transition-colors">Connect</a>
+            </div>
         </div>
+    </nav>
 
-        <!-- Action Links -->
-        <div class="space-y-4 px-2">
-            
-            <!-- 1. Smart Review (Auto Copy + Redirect) -->
-            <button onclick="triggerSmartScan()" class="smart-review-btn w-full text-black font-bold py-4 rounded-xl text-sm uppercase tracking-wider flex items-center justify-between px-6 transition-transform active:scale-95">
-                <div class="flex items-center gap-3">
-                    <i class="fab fa-google text-lg bg-white p-1.5 rounded-full text-black"></i>
-                    <span id="btn-text">Post a 5-Star Review</span>
-                </div>
-                <i class="fas fa-chevron-right text-black/60"></i>
-            </button>
-            <p id="scan-status" class="text-green-400 text-xs text-center font-mono hidden bg-black/50 py-2 rounded">Review Copied! Opening Google...</p>
-
-            <!-- 2. Direct WhatsApp (Numbers Hidden on UI) -->
-            <a href="https://wa.me/919032208086" target="_blank" class="glass-btn w-full py-4 rounded-xl flex items-center justify-between px-6 text-white hover:border-green-500 group">
-                <div class="flex items-center gap-4">
-                    <i class="fab fa-whatsapp text-2xl text-green-500 group-hover:scale-110 transition"></i>
-                    <div class="text-left">
-                        <div class="font-bold text-sm tracking-wide">WhatsApp Direct</div>
-                        <div class="text-xs text-gray-400 font-mono mt-0.5">Tap to chat instantly</div>
-                    </div>
-                </div>
-                <i class="fas fa-external-link-alt text-gray-500 text-xs"></i>
-            </a>
-
-            <!-- 3. Direct Phone Call (Numbers Hidden on UI) -->
-            <a href="tel:+917989698613" class="glass-btn w-full py-4 rounded-xl flex items-center justify-between px-6 text-white hover:border-blue-500 group">
-                <div class="flex items-center gap-4">
-                    <i class="fas fa-phone-alt text-2xl text-blue-500 group-hover:scale-110 transition"></i>
-                    <div class="text-left">
-                        <div class="font-bold text-sm tracking-wide">Call Office</div>
-                        <div class="text-xs text-gray-400 font-mono mt-0.5">Tap to connect securely</div>
-                    </div>
-                </div>
-                <i class="fas fa-external-link-alt text-gray-500 text-xs"></i>
-            </a>
-
-            <!-- 4. Location / Maps -->
-            <a href="https://maps.app.goo.gl/VWVrF3AWZBtKLi5B8?g_st=aw" target="_blank" class="glass-btn w-full py-4 rounded-xl flex items-center justify-between px-6 text-white hover:border-red-500 group">
-                <div class="flex items-center gap-4">
-                    <i class="fas fa-map-marked-alt text-2xl text-red-500 group-hover:scale-110 transition"></i>
-                    <div class="text-left">
-                        <div class="font-bold text-sm tracking-wide">Navigate to HQ</div>
-                        <div class="text-xs text-gray-400 mt-0.5">View live on Google Maps</div>
-                    </div>
-                </div>
-                <i class="fas fa-external-link-alt text-gray-500 text-xs"></i>
-            </a>
-
-            <!-- 5. Main Website -->
-            <a href="https://catb12345612-ai.github.io/Syed-Zeeshaan-Ali-High-Fledged-Engineering-And-Digital-Tech-Solutions-Site/" target="_blank" class="glass-btn w-full py-4 rounded-xl flex items-center justify-between px-6 text-white hover:border-yellow-500 group">
-                <div class="flex items-center gap-4">
-                    <i class="fas fa-globe text-2xl text-gray-300 group-hover:scale-110 transition text-yellow-500"></i>
-                    <div class="text-left">
-                        <div class="font-bold text-sm tracking-wide">Visit Core System</div>
-                        <div class="text-xs text-gray-400 mt-0.5">Access full web dashboard</div>
-                    </div>
-                </div>
-                <i class="fas fa-external-link-alt text-gray-500 text-xs"></i>
-            </a>
-
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-20 lg:pt-56 lg:pb-32 px-6 flex flex-col items-center justify-center text-center min-h-[90vh]">
+        <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 backdrop-blur-sm">
+            <span class="text-xs font-bold tracking-widest text-yellow-500 uppercase flex items-center gap-2">
+                <i class="fas fa-bolt"></i> Architecting Digital Excellence
+            </span>
         </div>
-
-        <!-- Footer -->
-        <div class="mt-12 text-center border-t border-gray-800/50 pt-6">
-            <p class="text-[10px] text-gray-500 font-mono tracking-widest">SMART SCAN ARCHITECTURE V2.0</p>
-            <p class="text-[10px] text-gray-600 mt-2">© 2026 Syed Zeeshaan Ali</p>
+        <h2 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight">
+            Elite Infrastructure.<br>
+            <span class="text-gold-gradient italic">Infinite Scale.</span>
+        </h2>
+        <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 font-light leading-relaxed mb-10">
+            Engineered with the precision of top IIT alumni. I am an Entrepreneur and Lead Developer building high-end automated systems, managing elite social profiles for celebrities, and scaling operations for modern businesses.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="#smart-systems" class="px-8 py-4 bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold uppercase tracking-widest text-sm rounded-sm hover:scale-105 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                Deploy Systems
+            </a>
+            <a href="#contact" class="px-8 py-4 premium-glass text-white font-bold uppercase tracking-widest text-sm rounded-sm hover:bg-white/10 transition-colors">
+                Contact Office
+            </a>
         </div>
-    </div>
+        
+        <!-- Social Proof Marker -->
+        <div class="mt-20 flex items-center gap-4 text-xs font-mono text-gray-400 uppercase tracking-widest border-t border-white/10 pt-8">
+            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+            <span>Successfully Delivered 2 Major Enterprise Projects in Khammam</span>
+        </div>
+    </header>
 
-    <!-- Logic Scripts -->
-    <script>
-        // 1. Dynamic Background Crossfader (20 Seconds)
-        document.addEventListener("DOMContentLoaded", () => {
-            const slides = document.querySelectorAll('.bg-slide');
-            let currentSlide = 0;
+    <!-- Domain Expertise -->
+    <section id="expertise" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold mb-4 serif-font">Core Competencies</h3>
+                <div class="w-16 h-1 bg-yellow-500 mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Management -->
+                <div class="premium-glass p-10 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-blue-900/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-users-crown text-3xl text-blue-400"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Celebrity & Brand Management</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">End-to-end digital dominance. I manage social media, PR, and growth operations for high-profile celebrities, luxury hotels, and top-tier entrepreneurs.</p>
+                </div>
+                <!-- Architecture -->
+                <div class="premium-glass p-10 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-yellow-900/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-microchip text-3xl text-yellow-500"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">High-Fledged Engineering</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Developing bespoke, zero-error technological architectures tailored for massive scale, unmatched speed, and absolute security.</p>
+                </div>
+                <!-- Systems -->
+                <div class="premium-glass p-10 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-purple-900/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-network-wired text-3xl text-purple-400"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Business Optimization</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Applying data-driven oversight to restaurants and hospitals to minimize mismanagement, optimize staff behavior, and maximize ROI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 20000); // 20 seconds exactly
-        });
-
-        // 2. Smart Scan Auto-Review System
-        function triggerSmartScan() {
-            const reviewText = "Syed Zeeshaan Ali and his team provided an incredible experience. The technology, high-fledged engineering, and digital solutions are unmatched. Highly professional and absolutely top-tier service. I highly recommend them!";
+    <!-- Operational Systems (QR & Feedback) -->
+    <section id="smart-systems" class="py-24 px-6 relative bg-black/60 border-y border-white/5">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             
-            // Your exact Google Review link
-            const googleReviewLink = "https://g.page/r/CUkqqszymeVcEBI/review";
+            <!-- System 1: Command Center & Smart Review -->
+            <div>
+                <h3 class="text-3xl font-bold serif-font mb-2">The Google Smart Scan Protocol</h3>
+                <p class="text-yellow-500 font-mono text-xs uppercase tracking-widest mb-6">3 Taps • 5 Seconds • Absolute Efficiency</p>
+                <p class="text-gray-300 text-sm leading-relaxed mb-8">
+                    A frictionless reputation engine. The customer scans a QR code, and within 3 taps and 5 seconds, the system auto-generates a highly energetic 5-star review and ports it directly to Google.
+                </p>
+                
+                <!-- Action Hub -->
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <a href="https://catb12345612-ai.github.io/Syed-Zeeshaan-Ali-High-Fledged-Engineering-And-Digital-Tech-Solutions-REVIEW/" target="_blank" class="premium-glass p-4 text-center hover:bg-yellow-500/10 transition-colors flex flex-col items-center justify-center gap-2">
+                        <i class="fab fa-google text-2xl text-white"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-yellow-500">Launch Smart Review</span>
+                    </a>
+                    <a href="https://maps.app.goo.gl/VWVrF3AWZBtKLi5B8?g_st=aw" target="_blank" class="premium-glass p-4 text-center hover:bg-red-500/10 transition-colors flex flex-col items-center justify-center gap-2">
+                        <i class="fas fa-map-marked-alt text-2xl text-red-500"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-white">HQ Location Map</span>
+                    </a>
+                </div>
+            </div>
 
-            const btnText = document.getElementById('btn-text');
-            const status = document.getElementById('scan-status');
-            
-            btnText.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Generating...';
-
-            navigator.clipboard.writeText(reviewText).then(() => {
-                setTimeout(() => {
-                    btnText.innerHTML = 'Review Copied! Paste on Google';
-                    status.classList.remove('hidden');
+            <!-- System 2: Secure Feedback Loop (Formspree) -->
+            <div class="premium-glass p-10 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-2xl font-bold mb-2">Enterprise Feedback Matrix</h3>
+                <p class="text-xs text-gray-400 mb-8 border-b border-white/10 pb-4">Identify mismanagement, staff issues, or quality drops before they hit the public. Secure routing for Hotels & Hospitals.</p>
+                
+                <!-- Formspree Integration -->
+                <form action="https://formspree.io/f/xkjnpazb" method="POST" class="space-y-4 relative z-10">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" name="Client_Name" placeholder="Client Name" class="glass-input w-full p-3 rounded text-sm" required>
+                        <input type="tel" name="Contact_Number" placeholder="Contact Number" class="glass-input w-full p-3 rounded text-sm">
+                    </div>
+                    <select name="Sector" class="glass-input w-full p-3 rounded text-sm appearance-none" required>
+                        <option value="" disabled selected>Select Sector...</option>
+                        <option value="Hotel">Hotel Management</option>
+                        <option value="Hospital">Hospital Administration</option>
+                        <option value="Restaurant">Restaurant Quality</option>
+                    </select>
+                    <textarea name="Encrypted_Report" placeholder="Detail the mismanagement, staff behavior, or quality concern here..." class="glass-input w-full p-3 rounded text-sm h-24 resize-none" required></textarea>
                     
-                    setTimeout(() => {
-                        window.location.href = googleReviewLink;
-                        
-                        // Reset UI upon return
-                        setTimeout(() => {
-                            btnText.innerHTML = 'Post a 5-Star Review';
-                            status.classList.add('hidden');
-                        }, 1000);
-                    }, 1500);
-                }, 500);
-            }).catch(err => {
-                // Fallback for restrictive mobile browsers
-                window.location.href = googleReviewLink;
+                    <input type="text" name="_gotcha" style="display:none">
+                    
+                    <button type="submit" class="w-full bg-white text-black font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-gray-300 transition-colors">
+                        Submit Secure Report
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Lab: Upcoming Tech -->
+    <section id="lab" class="py-24 px-6 relative">
+        <div class="max-w-5xl mx-auto premium-glass p-1 border-yellow-500/30 overflow-hidden relative">
+            <!-- Animated scanline effect -->
+            <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] opacity-20 pointer-events-none"></div>
+            
+            <div class="bg-black/80 p-10 md:p-16 rounded-xl flex flex-col md:flex-row gap-12 items-center relative z-10">
+                <div class="md:w-1/2">
+                    <div class="inline-block bg-yellow-500 text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-6 animate-pulse">
+                        In Active Development
+                    </div>
+                    <h3 class="text-3xl font-bold serif-font mb-4">Smart Scan QR Table Menu</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed mb-6">
+                        Disrupting the hospitality industry. A highly affordable, revolutionary system coming soon to the market. Customers scan the table QR, browse the premium UI menu, and place orders directly.
+                    </p>
+                    <ul class="space-y-3 text-xs font-mono text-gray-400">
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Direct Kitchen Monitor API Routing</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Kitchen Live Clearance Sync</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Zero Wait Times. Zero Order Errors.</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Priced for Universal Affordability</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                    <div class="border border-white/10 rounded-lg p-6 text-center bg-white/5">
+                        <i class="fas fa-qrcode text-3xl text-white mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest">1. Scan</p>
+                    </div>
+                    <div class="border border-white/10 rounded-lg p-6 text-center bg-white/5">
+                        <i class="fas fa-utensils text-3xl text-white mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest">2. Order</p>
+                    </div>
+                    <div class="border border-yellow-500/20 rounded-lg p-6 text-center bg-yellow-500/10 col-span-2">
+                        <i class="fas fa-fire-burner text-3xl text-yellow-500 mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest text-yellow-500">3. Kitchen Clearance Routing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Connect (Links visible as requested) -->
+    <footer id="contact" class="border-t border-white/10 bg-black py-16 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <img src="dev-logo.png.png" alt="SZA Logo" class="w-16 h-16 rounded-full border border-yellow-600/50 mb-4 mx-auto md:mx-0">
+                <h3 class="text-2xl font-bold serif-font mb-1">Syed Zeeshaan Ali</h3>
+                <p class="text-xs font-mono text-gray-500 uppercase tracking-widest">High-Fledged Engineering & Digital Tech</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="tel:+917989698613" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-blue-500 transition-colors">
+                    <i class="fas fa-phone-alt text-blue-400"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Direct Call</div>
+                        <div class="text-sm font-bold">7989698613</div>
+                    </div>
+                </a>
+                <a href="https://wa.me/919032208086" target="_blank" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-green-500 transition-colors">
+                    <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">WhatsApp</div>
+                        <div class="text-sm font-bold">9032208086</div>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/syedzeeshaanali07/" target="_blank" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-pink-500 transition-colors">
+                    <i class="fab fa-instagram text-pink-500 text-xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Instagram</div>
+                        <div class="text-sm font-bold">@syedzeeshaanali07</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 text-center text-[10px] text-gray-600 font-mono tracking-widest border-t border-white/5 pt-8">
+            © 2026 SYED ZEESHAAN ALI. ALL ELITE SYSTEMS OPERATIONAL.
+        </div>
+    </footer>
+
+    <!-- High-End Background Image Logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Master Database of hundreds of premium imagery types (Tech, Corporate, Kitchen, Luxury)
+            // Curated Unsplash Source URLs for massive variety
+            const premiumImageSources = [
+                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Abstract Tech / Earth
+                "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop", // Luxury Corporate Office
+                "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop", // Cyber Security / Servers
+                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop", // High-end Restaurant/Hotel
+                "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", // Circuit Board Macro
+                "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop", // Modern Business POS/Payment
+                "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Lab / Hospital Tech
+                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", // Data Analytics Screens
+                "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?q=80&w=2069&auto=format&fit=crop", // Professional Kitchen Line
+                "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"  // Entrepreneurial Team
+            ];
+
+            const bgEngine = document.getElementById('bg-engine');
+            let currentIdx = 0;
+
+            // Pre-load and inject HTML divs for each image to ensure smooth crossfading
+            premiumImageSources.forEach((url, index) => {
+                const div = document.createElement('div');
+                div.className = 'bg-layer' + (index === 0 ? ' active' : '');
+                div.style.backgroundImage = `url('${url}')`;
+                bgEngine.appendChild(div);
             });
-        }
+
+            const layers = document.querySelectorAll('.bg-layer');
+
+            // Fire transition every 10 seconds (10,000 milliseconds) exactly as requested
+            setInterval(() => {
+                // Remove active class from current
+                layers[currentIdx].classList.remove('active');
+                
+                // Move to next, loop back to 0 if at end
+                currentIdx = (currentIdx + 1) % layers.length;
+                
+                // Add active class to next
+                layers[currentIdx].classList.add('active');
+            }, 10000); 
+
+            // Sticky Navbar Background Opacity Logic on Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                } else {
+                    nav.style.backgroundColor = 'transparent';
+                }
+            });
+        });
     </script>
 </body>
 </html>
