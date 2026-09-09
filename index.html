@@ -41,8 +41,8 @@
             transition: opacity 2s ease-in-out, transform 12s linear;
         }
         .bg-layer.active {
-            opacity: 0.35; /* Keeps text readable */
-            transform: scale(1.1); /* Slow cinematic zoom */
+            opacity: 0.35; 
+            transform: scale(1.1); 
         }
 
         /* Dark Vignette Overlay */
@@ -109,7 +109,7 @@
         <div class="absolute inset-0 bg-black/40 backdrop-blur-md border-b border-white/5"></div>
         <div class="max-w-7xl mx-auto px-6 py-4 relative flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <img src="dev-logo.png_2.png" alt="SZA Logo" class="w-12 h-12 rounded-full border border-yellow-600/50 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                <img src="dev-logo.png_2.png" alt="SZA Logo" class="w-12 h-12 rounded-full border border-yellow-600/50 shadow-[0_0_15px_rgba(212,175,55,0.3)] bg-black">
                 <div>
                     <h1 class="text-lg font-bold tracking-widest text-white uppercase m-0 leading-tight">Syed Zeeshaan Ali</h1>
                     <p class="text-[9px] text-yellow-500 uppercase tracking-[0.2em] font-sans">High-Fledged Engineering</p>
@@ -162,7 +162,6 @@
                 <div class="w-16 h-1 bg-yellow-500 mx-auto"></div>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Management -->
                 <div class="premium-glass p-10 text-center group">
                     <div class="w-16 h-16 mx-auto bg-blue-900/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="fas fa-users-crown text-3xl text-blue-400"></i>
@@ -170,7 +169,6 @@
                     <h4 class="text-xl font-bold mb-4">Celebrity & Brand Management</h4>
                     <p class="text-sm text-gray-400 leading-relaxed">End-to-end digital dominance. I manage social media, PR, and growth operations for high-profile celebrities, luxury hotels, and top-tier entrepreneurs.</p>
                 </div>
-                <!-- Architecture -->
                 <div class="premium-glass p-10 text-center group">
                     <div class="w-16 h-16 mx-auto bg-yellow-900/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="fas fa-microchip text-3xl text-yellow-500"></i>
@@ -178,7 +176,6 @@
                     <h4 class="text-xl font-bold mb-4">High-Fledged Engineering</h4>
                     <p class="text-sm text-gray-400 leading-relaxed">Developing bespoke, zero-error technological architectures tailored for massive scale, unmatched speed, and absolute security.</p>
                 </div>
-                <!-- Systems -->
                 <div class="premium-glass p-10 text-center group">
                     <div class="w-16 h-16 mx-auto bg-purple-900/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="fas fa-network-wired text-3xl text-purple-400"></i>
@@ -202,7 +199,6 @@
                     A frictionless reputation engine. The customer scans a QR code, and within 3 taps and 5 seconds, the system auto-generates a highly energetic 5-star review and ports it directly to Google.
                 </p>
                 
-                <!-- Action Hub -->
                 <div class="grid grid-cols-2 gap-4 mb-8">
                     <a href="https://catb12345612-ai.github.io/Syed-Zeeshaan-Ali-High-Fledged-Engineering-And-Digital-Tech-Solutions-REVIEW/" target="_blank" class="premium-glass p-4 text-center hover:bg-yellow-500/10 transition-colors flex flex-col items-center justify-center gap-2">
                         <i class="fab fa-google text-2xl text-white"></i>
@@ -215,30 +211,27 @@
                 </div>
             </div>
 
-            <!-- System 2: Secure Feedback Loop (Formspree) -->
+            <!-- System 2: Automated WhatsApp Feedback Routing Engine -->
             <div class="premium-glass p-10 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
                 <h3 class="text-2xl font-bold mb-2">Enterprise Feedback Matrix</h3>
-                <p class="text-xs text-gray-400 mb-8 border-b border-white/10 pb-4">Identify mismanagement, staff issues, or quality drops before they hit the public. Secure routing for Hotels & Hospitals.</p>
+                <p class="text-xs text-gray-400 mb-8 border-b border-white/10 pb-4">Identify mismanagement, staff issues, or quality drops before they hit the public. Secure direct-to-CEO routing for Hotels & Hospitals.</p>
                 
-                <!-- Formspree Integration -->
-                <form action="https://formspree.io/f/xkjnpazb" method="POST" class="space-y-4 relative z-10">
+                <form id="feedbackForm" onsubmit="routeFeedbackToWhatsApp(event)" class="space-y-4 relative z-10">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="text" name="Client_Name" placeholder="Client Name" class="glass-input w-full p-3 rounded text-sm" required>
-                        <input type="tel" name="Contact_Number" placeholder="Contact Number" class="glass-input w-full p-3 rounded text-sm">
+                        <input type="text" id="fb-name" placeholder="Client Name" class="glass-input w-full p-3 rounded text-sm" required>
+                        <input type="tel" id="fb-phone" placeholder="Contact Number (Optional)" class="glass-input w-full p-3 rounded text-sm">
                     </div>
-                    <select name="Sector" class="glass-input w-full p-3 rounded text-sm appearance-none" required>
+                    <select id="fb-sector" class="glass-input w-full p-3 rounded text-sm appearance-none" required>
                         <option value="" disabled selected>Select Sector...</option>
-                        <option value="Hotel">Hotel Management</option>
-                        <option value="Hospital">Hospital Administration</option>
-                        <option value="Restaurant">Restaurant Quality</option>
+                        <option value="Hotel Management">Hotel Management</option>
+                        <option value="Hospital Administration">Hospital Administration</option>
+                        <option value="Restaurant Quality">Restaurant Quality</option>
                     </select>
-                    <textarea name="Encrypted_Report" placeholder="Detail the mismanagement, staff behavior, or quality concern here..." class="glass-input w-full p-3 rounded text-sm h-24 resize-none" required></textarea>
+                    <textarea id="fb-report" placeholder="Detail the mismanagement, staff behavior, or quality concern here..." class="glass-input w-full p-3 rounded text-sm h-24 resize-none" required></textarea>
                     
-                    <input type="text" name="_gotcha" style="display:none">
-                    
-                    <button type="submit" class="w-full bg-white text-black font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-gray-300 transition-colors">
-                        Submit Secure Report
+                    <button type="submit" id="fb-submit-btn" class="w-full bg-white text-black font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-gray-300 transition-colors">
+                        Process & Route Securely
                     </button>
                 </form>
             </div>
@@ -249,7 +242,6 @@
     <!-- Lab: Upcoming Tech -->
     <section id="lab" class="py-24 px-6 relative">
         <div class="max-w-5xl mx-auto premium-glass p-1 border-yellow-500/30 overflow-hidden relative">
-            <!-- Animated scanline effect -->
             <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] opacity-20 pointer-events-none"></div>
             
             <div class="bg-black/80 p-10 md:p-16 rounded-xl flex flex-col md:flex-row gap-12 items-center relative z-10">
@@ -286,11 +278,11 @@
         </div>
     </section>
 
-    <!-- Footer / Connect (Links visible as requested) -->
+    <!-- Footer / Connect (Raw Numbers Hidden) -->
     <footer id="contact" class="border-t border-white/10 bg-black py-16 px-6 relative z-10">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <img src="dev-logo.png.png" alt="SZA Logo" class="w-16 h-16 rounded-full border border-yellow-600/50 mb-4 mx-auto md:mx-0">
+                <img src="dev-logo.png.png" alt="SZA Logo" class="w-16 h-16 rounded-full border border-yellow-600/50 mb-4 mx-auto md:mx-0 bg-black">
                 <h3 class="text-2xl font-bold serif-font mb-1">Syed Zeeshaan Ali</h3>
                 <p class="text-xs font-mono text-gray-500 uppercase tracking-widest">High-Fledged Engineering & Digital Tech</p>
             </div>
@@ -299,21 +291,21 @@
                 <a href="tel:+917989698613" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-blue-500 transition-colors">
                     <i class="fas fa-phone-alt text-blue-400"></i>
                     <div class="text-left">
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Direct Call</div>
-                        <div class="text-sm font-bold">7989698613</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Voice Protocol</div>
+                        <div class="text-sm font-bold">Connect Securely</div>
                     </div>
                 </a>
                 <a href="https://wa.me/919032208086" target="_blank" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-green-500 transition-colors">
                     <i class="fab fa-whatsapp text-green-500 text-xl"></i>
                     <div class="text-left">
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">WhatsApp</div>
-                        <div class="text-sm font-bold">9032208086</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Encrypted Chat</div>
+                        <div class="text-sm font-bold">Message HQ</div>
                     </div>
                 </a>
                 <a href="https://www.instagram.com/syedzeeshaanali07/" target="_blank" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-pink-500 transition-colors">
                     <i class="fab fa-instagram text-pink-500 text-xl"></i>
                     <div class="text-left">
-                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Instagram</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Social Media</div>
                         <div class="text-sm font-bold">@syedzeeshaanali07</div>
                     </div>
                 </a>
@@ -324,28 +316,27 @@
         </div>
     </footer>
 
-    <!-- High-End Background Image Logic -->
+    <!-- Logic Engines -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Master Database of hundreds of premium imagery types (Tech, Corporate, Kitchen, Luxury)
-            // Curated Unsplash Source URLs for massive variety
+            // Master Database of premium imagery (Tech, Corporate, Kitchen, Luxury)
             const premiumImageSources = [
-                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Abstract Tech / Earth
-                "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop", // Luxury Corporate Office
-                "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop", // Cyber Security / Servers
-                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop", // High-end Restaurant/Hotel
-                "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", // Circuit Board Macro
-                "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop", // Modern Business POS/Payment
-                "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Lab / Hospital Tech
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", // Data Analytics Screens
-                "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?q=80&w=2069&auto=format&fit=crop", // Professional Kitchen Line
-                "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"  // Entrepreneurial Team
+                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?q=80&w=2069&auto=format&fit=crop", 
+                "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"  
             ];
 
             const bgEngine = document.getElementById('bg-engine');
             let currentIdx = 0;
 
-            // Pre-load and inject HTML divs for each image to ensure smooth crossfading
+            // Pre-load background engine layers
             premiumImageSources.forEach((url, index) => {
                 const div = document.createElement('div');
                 div.className = 'bg-layer' + (index === 0 ? ' active' : '');
@@ -355,19 +346,14 @@
 
             const layers = document.querySelectorAll('.bg-layer');
 
-            // Fire transition every 10 seconds (10,000 milliseconds) exactly as requested
+            // 10 Second Cinematic Transition
             setInterval(() => {
-                // Remove active class from current
                 layers[currentIdx].classList.remove('active');
-                
-                // Move to next, loop back to 0 if at end
                 currentIdx = (currentIdx + 1) % layers.length;
-                
-                // Add active class to next
                 layers[currentIdx].classList.add('active');
             }, 10000); 
 
-            // Sticky Navbar Background Opacity Logic on Scroll
+            // Sticky Navbar
             window.addEventListener('scroll', () => {
                 const nav = document.getElementById('navbar');
                 if (window.scrollY > 50) {
@@ -377,6 +363,35 @@
                 }
             });
         });
+
+        // WhatsApp Feedback Routing Engine with Simulated AI Auto-Reply
+        function routeFeedbackToWhatsApp(e) {
+            e.preventDefault();
+            
+            // Extract Form Data
+            const clientName = document.getElementById('fb-name').value;
+            const sector = document.getElementById('fb-sector').value;
+            const report = document.getElementById('fb-report').value;
+            const btn = document.getElementById('fb-submit-btn');
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initializing Secure Protocol...';
+
+            setTimeout(() => {
+                // Generate Automatic Contextual Reply
+                alert(`Automated Response: Thank you, ${clientName}. We have scanned your report regarding ${sector}. To ensure immediate resolution, you are now being routed directly to Syed Zeeshaan Ali's secure WhatsApp line.`);
+                
+                // Construct URL-Encoded WhatsApp Message
+                const targetNumber = "919032208086";
+                const waMessage = `*SYSTEM ALERT: CONFIDENTIAL MATRIX REPORT*%0A%0A*Client Name:* ${clientName}%0A*Sector Identified:* ${sector}%0A*Detailed Report:* ${report}%0A%0A_Generated via Elite Dashboard Protocol_`;
+                
+                // Open WhatsApp and Reset UI
+                window.open(`https://wa.me/${targetNumber}?text=${waMessage}`, '_blank');
+                
+                btn.innerHTML = originalText;
+                e.target.reset();
+            }, 1200);
+        }
     </script>
 </body>
 </html>
