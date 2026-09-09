@@ -8,16 +8,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         /* Custom High-End Styling */
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #ffffff; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #ffffff; scroll-behavior: smooth; }
         .glass-panel {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 1rem;
+            transition: all 0.3s ease;
         }
         .glass-panel:hover {
             border-color: rgba(212, 175, 55, 0.4);
-            transition: all 0.3s ease;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.05);
         }
         .gradient-text {
             background: linear-gradient(90deg, #d4af37, #f3e5ab, #d4af37);
@@ -43,17 +45,22 @@
             70% { box-shadow: 0 0 0 10px rgba(234, 179, 8, 0); }
             100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
         }
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
 </head>
 <body class="antialiased selection:bg-yellow-500 selection:text-black">
 
     <!-- Navigation -->
-    <nav class="flex justify-between items-center p-6 lg:px-20 border-b border-gray-900 bg-black/50 sticky top-0 z-50 backdrop-blur-md">
+    <nav class="flex justify-between items-center p-6 lg:px-20 border-b border-gray-900 bg-black/80 sticky top-0 z-50 backdrop-blur-xl shadow-lg">
         <div class="flex items-center gap-4">
-            <img src="dev-logo.png.png" alt="Syed Zeeshaan Ali Logo" class="h-14 w-14 object-contain rounded-full border border-yellow-600">
+            <img src="dev-logo.png.png" alt="Syed Zeeshaan Ali Logo" class="h-14 w-14 object-contain rounded-full border border-yellow-600 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
             <div>
                 <h1 class="text-lg font-bold tracking-wider">SYED ZEESHAAN ALI</h1>
-                <p class="text-[10px] text-yellow-500 uppercase tracking-widest">Tech Architect | Entrepreneur | Influencer</p>
+                <p class="text-[10px] text-yellow-500 uppercase tracking-widest font-mono">Tech Architect | Entrepreneur</p>
             </div>
         </div>
         <div class="hidden md:flex gap-6 text-xs font-bold tracking-widest text-gray-400 uppercase">
@@ -64,102 +71,137 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="flex flex-col items-center justify-center text-center py-28 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black -z-10"></div>
-        <h2 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Scaling <span class="gradient-text">Businesses</span> Through Code.</h2>
-        <p class="text-gray-400 max-w-3xl text-lg mb-10 leading-relaxed">
-            IIT-Grade Engineering meets Real-World Business Acumen. I am a Lead Developer, Social Media Strategist, and Serial Entrepreneur currently managing a portfolio of 6 major business ventures. I build systems that automate growth, capture sentiment, and scale operations seamlessly.
+    <header class="flex flex-col items-center justify-center text-center py-32 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/10 via-black to-black -z-10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10"></div>
+        <h2 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">Scaling <span class="gradient-text">Businesses</span> <br/>Through Code.</h2>
+        <p class="text-gray-400 max-w-3xl text-lg mb-10 leading-relaxed font-light">
+            IIT-Grade Engineering meets Real-World Business Acumen. I am a Lead Developer, Social Media Strategist, and Serial Entrepreneur currently managing a portfolio of 6 major ventures. I build systems that automate growth, capture sentiment, and scale operations seamlessly.
         </p>
     </header>
 
     <!-- Core Business Ecosystem (Services) -->
-    <section id="ecosystem" class="py-16 px-6 lg:px-20 max-w-7xl mx-auto">
-        <h3 class="text-sm font-bold text-yellow-500 uppercase tracking-widest mb-8 border-b border-gray-800 pb-4">The Ecosystem</h3>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="glass-panel p-8">
-                <i class="fas fa-code text-3xl text-blue-500 mb-4"></i>
-                <h4 class="text-xl font-bold mb-2">High-End Development</h4>
-                <p class="text-sm text-gray-400">Architecting robust, automated web platforms and custom software solutions designed for maximum efficiency and zero downtime.</p>
+    <section id="ecosystem" class="py-20 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-10 border-b border-gray-800 pb-4">
+            <div class="h-2 w-2 bg-yellow-500 rounded-full animate-pulse"></div>
+            <h3 class="text-sm font-bold text-yellow-500 uppercase tracking-widest">The Ecosystem</h3>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-panel p-8 group">
+                <div class="h-14 w-14 bg-blue-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition">
+                    <i class="fas fa-code text-2xl text-blue-500"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-3">High-End Development</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">Architecting robust, automated web platforms and custom software solutions designed for maximum efficiency, security, and zero downtime.</p>
             </div>
-            <div class="glass-panel p-8">
-                <i class="fas fa-hashtag text-3xl text-pink-500 mb-4"></i>
-                <h4 class="text-xl font-bold mb-2">Social Media & Brand Scaling</h4>
-                <p class="text-sm text-gray-400">End-to-end management of Instagram, social channels, and digital PR. Influencer-level strategies to dominate local and digital markets.</p>
+            <div class="glass-panel p-8 group">
+                <div class="h-14 w-14 bg-pink-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-pink-500/20 transition">
+                    <i class="fas fa-hashtag text-2xl text-pink-500"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-3">Brand Scaling</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">End-to-end management of Instagram, social channels, and digital PR. Influencer-level strategies to dominate local and digital markets.</p>
             </div>
-            <div class="glass-panel p-8">
-                <i class="fas fa-chart-line text-3xl text-green-500 mb-4"></i>
-                <h4 class="text-xl font-bold mb-2">Business Management</h4>
-                <p class="text-sm text-gray-400">Currently overseeing 6 major businesses. I apply data-driven analysis to streamline operations, cut overhead, and maximize daily revenue.</p>
+            <div class="glass-panel p-8 group">
+                <div class="h-14 w-14 bg-green-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition">
+                    <i class="fas fa-chart-line text-2xl text-green-500"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-3">Business Management</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">Currently overseeing 6 major businesses. I apply data-driven analysis to streamline operations, cut overhead, and maximize daily revenue.</p>
             </div>
         </div>
     </section>
 
     <!-- Smart Systems: Review & Feedback -->
-    <section id="smart-systems" class="py-16 px-6 lg:px-20 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10">
+    <section id="smart-systems" class="py-20 px-6 lg:px-20 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10">
         
         <!-- 1. The 5-Second Public Review Generator -->
-        <div class="glass-panel p-10 relative overflow-hidden flex flex-col justify-center">
-            <div class="absolute top-0 right-0 p-6 opacity-5 text-8xl"><i class="fab fa-google"></i></div>
-            <h3 class="text-2xl font-bold mb-3">Smart Scan: 5-Second Google Review</h3>
-            <p class="text-sm text-gray-400 mb-8">Boost your store's public rating instantly. Customers tap once, an AI-optimized review is copied to their clipboard, and Google opens automatically. Frictionless 5-star generation.</p>
-            
-            <button onclick="triggerSmartScan()" class="btn-primary text-white font-bold py-4 px-6 rounded text-sm uppercase tracking-wider flex items-center justify-center gap-3">
-                <i class="fas fa-bolt"></i> Generate & Post Review
-            </button>
-            <p id="scan-status" class="text-green-400 mt-4 text-xs font-mono hidden">Text Copied! Redirecting to Google...</p>
+        <div class="glass-panel p-10 relative overflow-hidden flex flex-col justify-center border-blue-900/30">
+            <div class="absolute -top-10 -right-10 p-6 opacity-5 text-9xl transform rotate-12"><i class="fab fa-google"></i></div>
+            <div class="relative z-10">
+                <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                    <i class="fas fa-star text-yellow-500"></i> Smart Scan Review
+                </h3>
+                <p class="text-sm text-gray-400 mb-8 leading-relaxed">Boost your store's public rating instantly. Customers tap once, an AI-optimized positive review is copied to their clipboard, and Google opens automatically. Frictionless 5-star generation.</p>
+                
+                <button onclick="triggerSmartScan()" class="w-full btn-primary text-white font-bold py-4 px-6 rounded-lg text-sm uppercase tracking-wider flex items-center justify-center gap-3 shadow-lg">
+                    <i class="fas fa-bolt"></i> Generate & Post Review
+                </button>
+                <div id="scan-status" class="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded text-green-400 text-xs font-mono text-center hidden">
+                    <i class="fas fa-check-circle mr-2"></i>Text Copied! Redirecting to Google Maps...
+                </div>
+            </div>
         </div>
 
-        <!-- 2. Internal Store Feedback Loop -->
-        <div class="glass-panel p-10">
-            <h3 class="text-2xl font-bold mb-3"><i class="fas fa-clipboard-list text-yellow-500 mr-2"></i>Internal Store Feedback System</h3>
-            <p class="text-sm text-gray-400 mb-6">Intercept negative experiences before they go public. A private channel for customers to tell management exactly what is lacking so the store can pivot and guarantee satisfaction.</p>
+        <!-- 2. Fully Operational Formspree Feedback Loop -->
+        <div class="glass-panel p-10 border-yellow-900/30">
+            <h3 class="text-2xl font-bold mb-2 flex items-center gap-3">
+                <i class="fas fa-shield-alt text-yellow-500"></i> Private Feedback Loop
+            </h3>
+            <p class="text-xs text-yellow-500/70 font-mono mb-6 uppercase tracking-widest border-b border-gray-800 pb-4">Secure Data Routing Active</p>
+            <p class="text-sm text-gray-400 mb-6 leading-relaxed">Intercept negative experiences before they go public. Submit feedback securely to the management dashboard to guarantee continuous improvement.</p>
             
-            <form onsubmit="submitStoreFeedback(event)" class="space-y-4">
+            <!-- CONNECTED TO FORMSPREE -->
+            <form action="https://formspree.io/f/xkjnpazb" method="POST" class="space-y-4">
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Customer Name" class="bg-gray-900 border border-gray-700 rounded p-3 text-sm text-white focus:outline-none focus:border-yellow-500" required>
-                    <input type="tel" placeholder="Phone Number" class="bg-gray-900 border border-gray-700 rounded p-3 text-sm text-white focus:outline-none focus:border-yellow-500">
+                    <input type="text" name="Customer_Name" placeholder="Customer Name" class="bg-black/50 border border-gray-800 rounded p-3 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors" required>
+                    <input type="tel" name="Phone_Number" placeholder="Phone Number" class="bg-black/50 border border-gray-800 rounded p-3 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors">
                 </div>
-                <select class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-sm text-white focus:outline-none focus:border-yellow-500" required>
-                    <option value="" disabled selected>Area of Improvement...</option>
-                    <option value="service">Customer Service Speed</option>
-                    <option value="quality">Product/Food Quality</option>
-                    <option value="ambience">Store Cleanliness/Ambience</option>
-                    <option value="other">Other</option>
+                <select name="Area_Of_Improvement" class="w-full bg-black/50 border border-gray-800 rounded p-3 text-sm text-gray-300 focus:outline-none focus:border-yellow-500 transition-colors appearance-none" required>
+                    <option value="" disabled selected>Select Area of Improvement...</option>
+                    <option value="Customer_Service">Customer Service Speed</option>
+                    <option value="Food_Quality">Product / Food Quality</option>
+                    <option value="Ambience">Store Cleanliness / Ambience</option>
+                    <option value="Other">Other</option>
                 </select>
-                <textarea placeholder="How can we make your next visit perfect? Tell us what we lacked today..." class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-sm text-white h-24 focus:outline-none focus:border-yellow-500" required></textarea>
-                <button type="submit" class="w-full bg-white text-black font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-gray-200 transition">Submit to Management</button>
+                <textarea name="Feedback_Message" placeholder="How can we make your next visit perfect? Tell us what we lacked today..." class="w-full bg-black/50 border border-gray-800 rounded p-3 text-sm text-white h-28 focus:outline-none focus:border-yellow-500 transition-colors resize-none" required></textarea>
+                
+                <!-- Anti-Spam hidden field for Formspree -->
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <button type="submit" class="w-full bg-white text-black font-bold py-4 rounded-lg text-sm uppercase tracking-wider hover:bg-gray-200 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                    Securely Submit to Management
+                </button>
             </form>
         </div>
     </section>
 
     <!-- Currently In Development (Lab) -->
-    <section id="in-dev" class="py-16 px-6 lg:px-20 max-w-7xl mx-auto">
-        <div class="border border-yellow-600/50 bg-yellow-900/10 rounded-2xl p-1 relative overflow-hidden">
-            <div class="glass-panel p-10 lg:flex items-center gap-10">
-                <div class="lg:w-1/2 mb-8 lg:mb-0">
-                    <span class="dev-badge inline-block bg-yellow-500 text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4">In Active Development</span>
-                    <h3 class="text-3xl font-bold mb-4">Smart Scan QR Menu & Kitchen Routing System</h3>
+    <section id="in-dev" class="py-20 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div class="border border-yellow-600/30 bg-gradient-to-br from-yellow-900/10 to-black rounded-2xl p-1 relative overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.05)]">
+            <div class="glass-panel p-10 lg:flex items-center gap-12 border-none">
+                <div class="lg:w-1/2 mb-10 lg:mb-0">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="dev-badge inline-block bg-yellow-500 text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(234,179,8,0.5)]">System In Lab</span>
+                        <span class="text-xs text-gray-500 font-mono">v2.0 Architecture</span>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4">Smart Scan QR Menu & Kitchen Routing</h3>
                     <p class="text-gray-400 text-sm leading-relaxed mb-6">
                         Revolutionizing the dining and retail experience. Customers scan a table-top QR code to access a live digital menu, place their order directly from their phone, and process payment. The system instantly routes the ticket to a live Kitchen/Fulfillment Monitor, ensuring zero miscommunications and rapid table delivery.
                     </p>
-                    <ul class="text-sm text-gray-300 space-y-2 font-mono">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> No waiting for waiters</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Direct Kitchen Monitor API</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i> Real-time inventory syncing</li>
+                    <ul class="text-sm text-gray-300 space-y-3 font-mono">
+                        <li class="flex items-center gap-3"><div class="h-2 w-2 rounded-full bg-green-500"></div> No waiting for waiters</li>
+                        <li class="flex items-center gap-3"><div class="h-2 w-2 rounded-full bg-green-500"></div> Direct Kitchen Monitor API Integration</li>
+                        <li class="flex items-center gap-3"><div class="h-2 w-2 rounded-full bg-green-500"></div> Real-time central inventory syncing</li>
                     </ul>
                 </div>
                 <div class="lg:w-1/2 grid grid-cols-2 gap-4">
-                    <div class="bg-black/50 border border-gray-800 rounded-lg p-6 text-center">
-                        <i class="fas fa-qrcode text-4xl text-white mb-3"></i>
-                        <h4 class="font-bold text-sm">1. Scan & Order</h4>
+                    <div class="bg-black/60 border border-gray-800/50 rounded-xl p-6 text-center hover:border-white/20 transition">
+                        <div class="h-12 w-12 mx-auto bg-gray-800 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-qrcode text-xl text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-300">1. Scan & Order</h4>
                     </div>
-                    <div class="bg-black/50 border border-gray-800 rounded-lg p-6 text-center">
-                        <i class="fas fa-fire-burner text-4xl text-orange-500 mb-3"></i>
-                        <h4 class="font-bold text-sm">2. Kitchen Monitor</h4>
+                    <div class="bg-black/60 border border-gray-800/50 rounded-xl p-6 text-center hover:border-white/20 transition">
+                        <div class="h-12 w-12 mx-auto bg-orange-900/30 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-fire-burner text-xl text-orange-500"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-300">2. Kitchen Monitor</h4>
                     </div>
-                    <div class="bg-black/50 border border-gray-800 rounded-lg p-6 text-center col-span-2">
-                        <i class="fas fa-concierge-bell text-4xl text-yellow-500 mb-3"></i>
-                        <h4 class="font-bold text-sm">3. Seamless Table Delivery</h4>
+                    <div class="bg-black/60 border border-gray-800/50 rounded-xl p-6 text-center col-span-2 hover:border-white/20 transition">
+                        <div class="h-12 w-12 mx-auto bg-yellow-900/30 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-concierge-bell text-xl text-yellow-500"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-300">3. Seamless Table Delivery</h4>
                     </div>
                 </div>
             </div>
@@ -167,30 +209,33 @@
     </section>
 
     <!-- Footer / Contact -->
-    <footer class="border-t border-gray-900 mt-10 py-16 px-6 lg:px-20 text-center bg-black">
+    <footer class="border-t border-gray-900 mt-10 py-16 px-6 lg:px-20 text-center bg-[#020202]">
         <h3 class="text-2xl font-bold mb-2">Syed Zeeshaan Ali</h3>
-        <p class="text-gray-500 text-sm mb-10">Architecting the future of automated business.</p>
+        <p class="text-gray-500 text-sm mb-10 font-light">Architecting the future of automated business systems.</p>
         
-        <div class="flex flex-wrap justify-center gap-4 mb-10">
-            <a href="tel:9032208086" class="glass-panel px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition">
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <a href="tel:9032208086" class="glass-panel px-6 py-4 flex items-center gap-3 hover:bg-gray-800 transition rounded-lg">
                 <i class="fas fa-phone-alt text-blue-400"></i>
-                <span class="font-mono text-sm">9032208086</span>
+                <span class="font-mono text-sm tracking-wide">9032208086</span>
             </a>
-            <a href="https://wa.me/917989698613" target="_blank" class="glass-panel px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition">
+            <a href="https://wa.me/917989698613" target="_blank" class="glass-panel px-6 py-4 flex items-center gap-3 hover:bg-gray-800 transition rounded-lg">
                 <i class="fab fa-whatsapp text-green-500 text-xl"></i>
-                <span class="font-mono text-sm">7989698613</span>
+                <span class="font-mono text-sm tracking-wide">7989698613</span>
             </a>
-            <a href="https://www.instagram.com/syedzeeshaanali07/" target="_blank" class="glass-panel px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition">
+            <a href="https://www.instagram.com/syedzeeshaanali07/" target="_blank" class="glass-panel px-6 py-4 flex items-center gap-3 hover:bg-gray-800 transition rounded-lg">
                 <i class="fab fa-instagram text-pink-500 text-xl"></i>
-                <span class="font-mono text-sm">@syedzeeshaanali07</span>
+                <span class="font-mono text-sm tracking-wide">@syedzeeshaanali07</span>
             </a>
         </div>
-        <p class="text-gray-700 text-xs">© 2026 Syed Zeeshaan Ali. All Systems Operational.</p>
+        <div class="flex items-center justify-center gap-2 text-gray-700 text-xs font-mono">
+            <div class="h-1.5 w-1.5 bg-green-500 rounded-full"></div>
+            © 2026 Syed Zeeshaan Ali. All Core Systems Operational.
+        </div>
     </footer>
 
     <!-- JavaScript Engines -->
     <script>
-        // 1. Smart Scan System (Public Google Review)
+        // 1. Smart Scan System (Public Google Review via Clipboard API)
         function triggerSmartScan() {
             // The text that gets copied to the customer's phone
             const reviewText = "Incredible experience! The service is unmatched, the quality is top-tier, and the management by Syed Zeeshaan Ali's team is highly professional. Highly recommended!";
@@ -198,28 +243,37 @@
             // Your exact Google Business Map Link
             const googleReviewLink = "https://www.google.com/maps?cid=6693925689250949705";
 
+            const btn = document.querySelector('.btn-primary');
+            const originalText = btn.innerHTML;
+            
+            // Show loading state
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing System...';
+            btn.style.opacity = '0.8';
+
             // Copy the text and redirect
             navigator.clipboard.writeText(reviewText).then(() => {
                 const status = document.getElementById('scan-status');
-                status.classList.remove('hidden');
                 
-                // Redirects to your map link after 1.5 seconds
                 setTimeout(() => {
-                    window.open(googleReviewLink, '_blank');
-                    status.classList.add('hidden');
-                }, 1500);
+                    btn.innerHTML = originalText;
+                    btn.style.opacity = '1';
+                    status.classList.remove('hidden');
+                    status.classList.add('animate-pulse');
+                    
+                    // Redirects to your map link
+                    setTimeout(() => {
+                        window.open(googleReviewLink, '_blank');
+                        status.classList.add('hidden');
+                        status.classList.remove('animate-pulse');
+                    }, 1800);
+                }, 800);
+                
             }).catch(err => {
-                // If clipboard fails, still redirect them to your map
+                // If clipboard fails (e.g. strict browser security), fallback to just redirecting
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
                 window.open(googleReviewLink, '_blank');
             });
-        }
-
-        // 2. Private Store Feedback System (Damage Control)
-        function submitStoreFeedback(e) {
-            e.preventDefault();
-            // In a real build, this would send data via API to your dashboard
-            alert("Feedback securely routed to Store Management. Thank you for helping us improve!");
-            e.target.reset();
         }
     </script>
 </body>
