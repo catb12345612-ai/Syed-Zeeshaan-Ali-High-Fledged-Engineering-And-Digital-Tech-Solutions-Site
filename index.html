@@ -94,6 +94,53 @@
             border-color: var(--gold-primary);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
+
+        /* ================================================================= */
+        /* NEW: Premium AI-grade VFX layer — transform/opacity only, no lag  */
+        /* ================================================================= */
+
+        /* Cursor-reactive gold spotlight inside the hero */
+        #hero-spotlight{
+            position:absolute; inset:0; z-index:-1; pointer-events:none;
+            background: radial-gradient(circle 420px at var(--mx,50%) var(--my,30%), rgba(212,175,55,0.16), transparent 70%);
+        }
+
+        /* Ambient floating orbs — decorative depth behind section content */
+        .ai-orb{
+            position:absolute; border-radius:9999px; filter:blur(70px); opacity:.28; pointer-events:none; z-index:0;
+            animation: orbFloat 16s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes orbFloat{
+            0%,100%{ transform:translate(0,0); }
+            50%{ transform:translate(26px,-30px); }
+        }
+
+        /* Scroll-reveal for section headers */
+        .reveal{ clip-path: inset(0 0 100% 0); opacity:0; transition: clip-path .9s cubic-bezier(.16,1,.3,1), opacity .6s ease; }
+        .reveal.in{ clip-path: inset(0 0 0% 0); opacity:1; }
+
+        /* Rotating gold/violet aura ring — wraps the feedback matrix card */
+        .aura-ring{ position:relative; z-index:0; }
+        .aura-ring::before{
+            content:'';
+            position:absolute; inset:-2px;
+            border-radius:18px;
+            background: conic-gradient(from 0deg, var(--gold-primary), var(--gold-light), var(--gold-primary), #7c5cff, var(--gold-primary));
+            filter: blur(8px);
+            opacity:.55;
+            z-index:-1;
+            animation: auraRotate 6s linear infinite;
+            will-change: transform;
+        }
+        @keyframes auraRotate{ to{ transform: rotate(360deg); } }
+
+        @media (prefers-reduced-motion:reduce){
+            .reveal{ clip-path:none; opacity:1; }
+            .ai-orb{ animation:none !important; }
+            .aura-ring::before{ animation:none !important; }
+        }
+        /* ================================================================= */
     </style>
 </head>
 <body class="antialiased">
@@ -125,7 +172,8 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative pt-40 pb-20 lg:pt-56 lg:pb-32 px-6 flex flex-col items-center justify-center text-center min-h-[90vh]">
+    <header id="hero" class="relative pt-40 pb-20 lg:pt-56 lg:pb-32 px-6 flex flex-col items-center justify-center text-center min-h-[90vh]">
+        <div id="hero-spotlight"></div>
         <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 backdrop-blur-sm">
             <span class="text-xs font-bold tracking-widest text-yellow-500 uppercase flex items-center gap-2">
                 <i class="fas fa-bolt"></i> Architecting Digital Excellence
@@ -150,16 +198,18 @@
         <!-- Social Proof Marker -->
         <div class="mt-20 flex items-center gap-4 text-xs font-mono text-gray-400 uppercase tracking-widest border-t border-white/10 pt-8">
             <i class="fas fa-check-circle text-green-500 text-lg"></i>
-            <span>Successfully Delivered 2 Major Enterprise Projects in Khammam</span>
+            <span>Successfully Delivered <span id="stat-count">0</span> Major Enterprise Projects in Khammam</span>
         </div>
     </header>
 
     <!-- Domain Expertise -->
-    <section id="expertise" class="py-24 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+    <section id="expertise" class="py-24 px-6 relative overflow-hidden">
+        <div class="ai-orb" style="width:340px;height:340px; background:#d4af37; top:-90px; left:-110px;"></div>
+        <div class="ai-orb" style="width:260px;height:260px; background:#7c5cff; bottom:-70px; right:-90px; animation-delay:4s;"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal">
                 <h3 class="text-4xl font-bold mb-4 serif-font">Core Competencies</h3>
-                <div class="w-16 h-1 bg-yellow-500 mx-auto"></div>
+                <div class="w-16 h-1 bg-yellow-500 mx-auto shadow-[0_0_12px_rgba(212,175,55,0.6)]"></div>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="premium-glass p-10 text-center group">
@@ -188,15 +238,17 @@
     </section>
 
     <!-- Enterprise Projects -->
-    <section id="projects" class="py-24 px-6 relative bg-black/40 border-y border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+    <section id="projects" class="py-24 px-6 relative bg-black/40 border-y border-white/5 overflow-hidden">
+        <div class="ai-orb" style="width:300px;height:300px; background:#d4af37; top:20%; right:-100px; animation-delay:2s;"></div>
+        <div class="ai-orb" style="width:240px;height:240px; background:#22c55e; bottom:-60px; left:-80px; animation-delay:6s;"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal">
                 <h3 class="text-4xl font-bold mb-4 serif-font">Major Enterprise Deployments</h3>
-                <div class="w-16 h-1 bg-yellow-500 mx-auto"></div>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-sm">Two critical infrastructure solutions engineered and successfully deployed in Khammam.</p>
+                <div class="w-16 h-1 bg-yellow-500 mx-auto shadow-[0_0_12px_rgba(212,175,55,0.6)]"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-sm">Three critical infrastructure solutions engineered and successfully deployed in Khammam.</p>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-10">
+            <div class="grid md:grid-cols-3 gap-10">
                 <!-- Project 1: Smart Scan -->
                 <div class="premium-glass p-10 border-l-4 border-l-blue-500">
                     <div class="flex items-center gap-4 mb-4">
@@ -220,6 +272,19 @@
                     </div>
                     <p class="text-sm text-gray-300 leading-relaxed">
                         An internal data-routing system designed for high-volume stores and restaurants. It empowers management to intercept and resolve issues regarding staff behavior, billing errors, or service delays *before* they impact public reputation, ensuring top-tier service standards are maintained.
+                    </p>
+                </div>
+
+                <!-- Project 3: Smart Scan QR Table Menu — now completed and serving -->
+                <div class="premium-glass p-10 border-l-4 border-l-yellow-500">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-qrcode text-yellow-400"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold">Project 03: Smart Scan QR Table Menu</h4>
+                    </div>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Now fully deployed and serving live customers. Guests scan the table QR, browse a premium digital menu, and place orders that route straight to the kitchen monitor — cutting wait times and eliminating order errors end-to-end.
                     </p>
                 </div>
             </div>
@@ -250,11 +315,11 @@
                 </div>
             </div>
 
-            <!-- System 2: Automated WhatsApp Feedback Routing Engine -->
-            <div class="premium-glass p-10 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+            <!-- System 2: Automated WhatsApp + Email Feedback Routing Engine -->
+            <div class="premium-glass p-10 relative aura-ring">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
                 <h3 class="text-2xl font-bold mb-2">Enterprise Feedback Matrix</h3>
-                <p class="text-xs text-gray-400 mb-8 border-b border-white/10 pb-4">Identify mismanagement, staff issues, or quality drops securely. Routing directly to the executive line.</p>
+                <p class="text-xs text-gray-400 mb-8 border-b border-white/10 pb-4">Identify mismanagement, staff issues, or quality drops securely. Routing directly to the executive line and email inbox.</p>
                 
                 <form id="feedbackForm" onsubmit="routeFeedbackToWhatsApp(event)" class="space-y-4 relative z-10">
                     <div class="grid grid-cols-2 gap-4">
@@ -272,6 +337,7 @@
                     <button type="submit" id="fb-submit-btn" class="w-full bg-white text-black font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-gray-300 transition-colors">
                         Process & Route Securely
                     </button>
+                    <p class="text-[10px] text-gray-500 text-center pt-1">Routes to WhatsApp instantly, and opens a pre-filled email to the executive line — hit send in your mail app to complete delivery.</p>
                 </form>
             </div>
 
@@ -288,29 +354,29 @@
                     <div class="inline-block bg-yellow-500 text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-6 animate-pulse">
                         In Active Development
                     </div>
-                    <h3 class="text-3xl font-bold serif-font mb-4">Smart Scan QR Table Menu</h3>
+                    <h3 class="text-3xl font-bold serif-font mb-4">Autonomous Operations Engine</h3>
                     <p class="text-sm text-gray-300 leading-relaxed mb-6">
-                        Disrupting the hospitality industry. A highly affordable, revolutionary system coming soon to the market. Customers scan the table QR, browse the premium UI menu, and place orders directly.
+                        The next evolution of business optimization — an AI-driven automation layer that watches staff workflows, billing patterns, and service timing in real time, flags anomalies before they become customer complaints, and routes alerts straight to management. Currently in active development and internal testing.
                     </p>
                     <ul class="space-y-3 text-xs font-mono text-gray-400">
-                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Direct Kitchen Monitor API Routing</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Kitchen Live Clearance Sync</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Zero Wait Times. Zero Order Errors.</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Priced for Universal Affordability</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Real-Time Anomaly Detection</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Automated Management Alerts</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Self-Learning Behavior Models</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-caret-right text-yellow-500"></i> Zero Manual Oversight Required</li>
                     </ul>
                 </div>
                 <div class="md:w-1/2 grid grid-cols-2 gap-4">
                     <div class="border border-white/10 rounded-lg p-6 text-center bg-white/5">
-                        <i class="fas fa-qrcode text-3xl text-white mb-3"></i>
-                        <p class="text-xs font-bold uppercase tracking-widest">1. Scan</p>
+                        <i class="fas fa-satellite-dish text-3xl text-white mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest">1. Monitor</p>
                     </div>
                     <div class="border border-white/10 rounded-lg p-6 text-center bg-white/5">
-                        <i class="fas fa-utensils text-3xl text-white mb-3"></i>
-                        <p class="text-xs font-bold uppercase tracking-widest">2. Order</p>
+                        <i class="fas fa-brain text-3xl text-white mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest">2. Analyze</p>
                     </div>
                     <div class="border border-yellow-500/20 rounded-lg p-6 text-center bg-yellow-500/10 col-span-2">
-                        <i class="fas fa-fire-burner text-3xl text-yellow-500 mb-3"></i>
-                        <p class="text-xs font-bold uppercase tracking-widest text-yellow-500">3. Kitchen Clearance Routing</p>
+                        <i class="fas fa-bell text-3xl text-yellow-500 mb-3"></i>
+                        <p class="text-xs font-bold uppercase tracking-widest text-yellow-500">3. Instant Alert Routing</p>
                     </div>
                 </div>
             </div>
@@ -339,6 +405,13 @@
                     <div class="text-left">
                         <div class="text-[10px] text-gray-400 uppercase tracking-widest">Encrypted Chat</div>
                         <div class="text-sm font-bold">Message HQ</div>
+                    </div>
+                </a>
+                <a href="mailto:dorababupeddamisalu@gmail.com" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-yellow-500 transition-colors">
+                    <i class="fas fa-envelope text-yellow-500 text-xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Priority Inbox</div>
+                        <div class="text-sm font-bold">Email Directly</div>
                     </div>
                 </a>
                 <a href="https://www.instagram.com/syedzeeshaanali07/" target="_blank" class="premium-glass px-6 py-4 flex items-center gap-3 hover:border-pink-500 transition-colors">
@@ -400,14 +473,65 @@
                     nav.style.backgroundColor = 'transparent';
                 }
             });
+
+            // --- NEW: Cursor-reactive gold spotlight in the hero ---
+            const hero = document.getElementById('hero');
+            const spotlight = document.getElementById('hero-spotlight');
+            if (hero && spotlight) {
+                hero.addEventListener('mousemove', (e) => {
+                    const rect = hero.getBoundingClientRect();
+                    spotlight.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+                    spotlight.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+                });
+            }
+
+            // --- NEW: Scroll-reveal for section headers ---
+            const revealEls = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            revealEls.forEach(el => revealObserver.observe(el));
+
+            // --- NEW: Animated count-up for the enterprise projects stat ---
+            const statCountEl = document.getElementById('stat-count');
+            function animateCount(el, target, duration = 1200) {
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    el.textContent = Math.floor(progress * target);
+                    if (progress < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        el.textContent = target;
+                    }
+                }
+                requestAnimationFrame(tick);
+            }
+            if (statCountEl) {
+                const statObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCount(statCountEl, 3);
+                            statObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                statObserver.observe(statCountEl);
+            }
         });
 
-        // WhatsApp Feedback Routing Engine with Simulated AI Auto-Reply
+        // WhatsApp + Direct Email Feedback Routing Engine with Simulated AI Auto-Reply
         function routeFeedbackToWhatsApp(e) {
             e.preventDefault();
             
             // Extract Form Data
             const clientName = document.getElementById('fb-name').value;
+            const phone = document.getElementById('fb-phone').value;
             const sector = document.getElementById('fb-sector').value;
             const report = document.getElementById('fb-report').value;
             const btn = document.getElementById('fb-submit-btn');
@@ -417,14 +541,30 @@
 
             setTimeout(() => {
                 // Generate Automatic Contextual Reply
-                alert(`Automated Response: Thank you, ${clientName}. We have scanned your report regarding ${sector}. To ensure immediate resolution, you are now being routed directly to Syed Zeeshaan Ali's secure WhatsApp line.`);
+                alert(`Automated Response: Thank you, ${clientName}. We have scanned your report regarding ${sector}. You are now being routed to Syed Zeeshaan Ali's secure WhatsApp line, and a pre-filled email is being prepared for direct delivery.`);
                 
                 // Construct URL-Encoded WhatsApp Message
                 const targetNumber = "919032208086";
-                const waMessage = `*SYSTEM ALERT: CONFIDENTIAL MATRIX REPORT*%0A%0A*Client Name:* ${clientName}%0A*Sector Identified:* ${sector}%0A*Detailed Report:* ${report}%0A%0A_Generated via Elite Dashboard Protocol_`;
-                
-                // Open WhatsApp and Reset UI
+                const waMessage = `*SYSTEM ALERT: CONFIDENTIAL MATRIX REPORT*%0A%0A*Client Name:* ${clientName}%0A*Contact Number:* ${phone || 'Not provided'}%0A*Sector Identified:* ${sector}%0A*Detailed Report:* ${report}%0A%0A_Generated via Elite Dashboard Protocol_`;
                 window.open(`https://wa.me/${targetNumber}?text=${waMessage}`, '_blank');
+
+                // Direct Email Escalation — opens the visitor's own mail app, pre-addressed and pre-filled.
+                // Note: this requires the visitor to hit "send" in their mail app; a static page cannot
+                // dispatch email silently without a backend service.
+                const mailSubject = encodeURIComponent(`CONFIDENTIAL MATRIX REPORT — ${sector}`);
+                const mailBody = encodeURIComponent(
+`SYSTEM ALERT: CONFIDENTIAL MATRIX REPORT
+
+Client Name: ${clientName}
+Contact Number: ${phone || 'Not provided'}
+Sector Identified: ${sector}
+
+Detailed Report:
+${report}
+
+Generated via Elite Dashboard Protocol`
+                );
+                window.open(`mailto:dorababupeddamisalu@gmail.com?subject=${mailSubject}&body=${mailBody}`, '_blank');
                 
                 btn.innerHTML = originalText;
                 e.target.reset();
